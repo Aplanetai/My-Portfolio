@@ -8,118 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        :root {
-            --bg-dark: #111827;
-            --bg-card: #1f2937;
-            --border-color: #374151;
-            --text-primary: #F0F6FC;
-            --text-secondary: #C9D1D9;
-            --accent-red: #e40000;
-            --accent-red-dark: #c30000;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-secondary);
-        }
-        .font-heading {
-            font-family: 'Poppins', sans-serif;
-        }
-        #main-header {
-            transition: background-color 0.3s ease-in-out;
-        }
-        #main-header.scrolled {
-            background-color: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        #hero-typing::after {
-            content: '_';
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink { from, to { opacity: 1; } 50% { opacity: 0; } }
-        
-        .nav-link-desktop {
-            position: relative;
-        }
-        .nav-link-desktop::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -6px;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-red);
-            transition: width 0.3s ease;
-        }
-        .nav-link-desktop:hover::after, .nav-link-desktop.active::after {
-            width: 100%;
-        }
-        
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        /* Mind Map Styling */
-        .mind-map-node rect { fill: var(--bg-dark); stroke: var(--accent-red); }
-        .mind-map-node:hover rect { fill: #374151; }
-        .mind-map-node text { fill: var(--text-secondary); }
-        .mind-map-link { stroke: var(--accent-red); stroke-opacity: 0.4; }
-
-        /* Mobile Menu Animation */
-        #mobile-menu-panel { transition: transform 0.3s ease-in-out; }
-        .hamburger .line { transition: all 0.3s ease-in-out; }
-        .hamburger.active .line-1 { transform: translateY(8px) rotate(45deg); }
-        .hamburger.active .line-2 { opacity: 0; }
-        .hamburger.active .line-3 { transform: translateY(-8px) rotate(-45deg); }
-
-         /* Vertical Timeline for Process */
-        .timeline-container::before {
-            content: ''; position: absolute; top: 0; left: 1.25rem;
-            height: 100%; width: 2px; background: var(--border-color);
-            transform: translateX(-50%);
-        }
-        .timeline-item { position: relative; }
-        .timeline-dot {
-            position: absolute; top: 0.25rem; left: 1.25rem;
-            width: 1rem; height: 1rem; border-radius: 9999px;
-            background-color: var(--bg-dark); border: 3px solid var(--accent-red);
-            transform: translateX(-50%); z-index: 1;
-        }
-        .timeline-content { margin-left: 3.5rem; }
-
-        /* Slider Styles */
-        .slider-container { position: relative; overflow: hidden; width: 100%; }
-        .slider-track { display: flex; transition: transform 0.5s ease-in-out; }
-        .slide { flex-shrink: 0; width: 100%; box-sizing: border-box; padding: 0 0.5rem; }
-        @media (min-width: 768px) { .slide { width: 50%; } }
-        @media (min-width: 1024px) { .slide { width: 33.3333%; } }
-        .slider-button {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background-color: rgba(31, 41, 55, 0.7); border: 1px solid #4b5563;
-            color: var(--accent-red); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10;
-            display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
-        }
-        .slider-button:hover { background-color: var(--accent-red); color: #ffffff; }
-        .slider-button.prev { left: -20px; }
-        .slider-button.next { right: -20px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
 
     <!-- Header & Navigation -->
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold font-heading text-[var(--accent-red)]">AJ</a>
-            
+        <nav class="container mx-auto px-6 py-4 flex justify-end items-center">
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="nav-link-desktop text-sm font-semibold tracking-wide hover:text-white transition-colors">ABOUT</a>
                 <a href="#skills" class="nav-link-desktop text-sm font-semibold tracking-wide hover:text-white transition-colors">SKILLS</a>
                 <a href="#timeline" class="nav-link-desktop text-sm font-semibold tracking-wide hover:text-white transition-colors">TIMELINE</a>
                 <a href="#projects" class="nav-link-desktop text-sm font-semibold tracking-wide hover:text-white transition-colors">PROJECTS</a>
+                <a href="#responsibilities" class="nav-link-desktop text-sm font-semibold tracking-wide hover:text-white transition-colors">RESPONSIBILITIES</a>
                 <a href="#contact" class="nav-link-desktop text-sm font-semibold tracking-wide hover:text-white transition-colors">CONTACT</a>
             </div>
 
@@ -140,7 +42,9 @@
             <a href="#about" class="text-lg font-semibold tracking-wide">ABOUT</a>
             <a href="#skills" class="text-lg font-semibold tracking-wide">SKILLS</a>
             <a href="#timeline" class="text-lg font-semibold tracking-wide">TIMELINE</a>
+            <a href="#process" class="text-lg font-semibold tracking-wide">PROCESS</a>
             <a href="#projects" class="text-lg font-semibold tracking-wide">PROJECTS</a>
+            <a href="#responsibilities" class="text-lg font-semibold tracking-wide">RESPONSIBILITIES</a>
             <a href="#contact" class="text-lg font-semibold tracking-wide">CONTACT</a>
         </nav>
     </div>
@@ -148,15 +52,35 @@
     <main class="container mx-auto px-6">
 
         <!-- Hero Section -->
-        <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center">
-            <h1 class="text-5xl md:text-7xl font-bold font-heading text-white">Abhijeet Singh</h1>
-            <p class="mt-4 text-lg md:text-xl font-medium text-gray-400">MIS | NPET Operations <span class="text-[var(--accent-red)]">@Airtel</span></p>
-            <p class="mt-8 max-w-2xl text-lg text-gray-400">
-                I build hyper-efficient automated solutions that bridge the gap between complex data and <span id="hero-typing" class="font-semibold text-[var(--accent-red)]"></span>
-            </p>
-            <a href="#about" class="mt-12 animate-bounce">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-            </a>
+        <section id="hero" class="min-h-screen flex flex-col items-center text-center p-6 pt-24 pb-10">
+            <div class="flex-grow flex flex-col justify-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold font-heading text-white">Abhijeet Singh</h1>
+                <p class="mt-4 text-lg md:text-xl font-medium text-gray-400">MIS | NPET Operations <span class="text-[var(--accent-red)]">@Airtel</span></p>
+                <p class="mt-8 max-w-2xl text-lg text-gray-400">
+                    I build hyper-efficient automated solutions that bridge the gap between complex data and <span id="hero-typing" class="font-semibold text-[var(--accent-red)]"></span>
+                </p>
+            </div>
+            
+            <div class="w-full max-w-lg">
+                 <div class="relative mb-6">
+                    <input type="text" placeholder="Search..." class="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <svg class="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <div class="flex justify-center items-center space-x-6">
+                     <a href="mailto:your-email@example.com" class="text-gray-400 hover:text-white transition-colors" title="Email">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors" title="LinkedIn">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                    </a>
+                    <a href="#" class="inline-block bg-[var(--accent-red)] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[var(--accent-red-dark)] transition-all duration-300 transform hover:scale-105 text-sm">
+                        Download CV
+                    </a>
+                </div>
+                <a href="#about" class="mt-8 inline-block animate-bounce">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+                </a>
+            </div>
         </section>
 
         <!-- About Section -->
@@ -183,33 +107,50 @@
             </div>
         </section>
 
-        <!-- Timeline Section -->
+        <!-- New Horizontal Timeline Section -->
         <section id="timeline" class="py-24 reveal">
-            <h2 class="text-3xl font-bold font-heading text-white mb-6">My Timeline</h2>
-            <div id="timeline-map-container" class="h-[400px] w-full bg-[var(--bg-card)] rounded-lg p-4 border border-[var(--border-color)]"></div>
+            <div class="flex justify-between items-center mb-6">
+                 <h2 class="text-3xl font-bold font-heading text-white uppercase">My Timeline</h2>
+                 <div class="flex space-x-2">
+                    <button id="sort-asc" class="timeline-sort-button active text-sm px-3 py-1 rounded-md">Oldest First</button>
+                    <button id="sort-desc" class="timeline-sort-button text-sm px-3 py-1 rounded-md">Newest First</button>
+                 </div>
+            </div>
+            <div class="horizontal-timeline-wrapper">
+                <div id="timeline-container" class="horizontal-timeline">
+                    <!-- Events will be injected by JS -->
+                </div>
+            </div>
+             <div class="w-full flex justify-center">
+                <div id="timeline-details-container" class="w-full max-w-xl">
+                    <div id="timeline-details-content" class="border border-[var(--border-color)] rounded-lg p-6">
+                        <!-- Details will be injected by JS -->
+                    </div>
+                </div>
+            </div>
         </section>
         
         <!-- Process Section -->
         <section id="process" class="py-24 reveal">
-            <h2 class="text-3xl font-bold font-heading text-white mb-12">My Process</h2>
-            <div class="relative timeline-container">
-                <div class="timeline-item mb-12">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+            <h2 class="text-3xl font-bold font-heading text-white mb-12 uppercase">My Process</h2>
+            <div class="relative process-timeline-container">
+                <div class="process-timeline-item mb-12">
+                    <div class="process-timeline-dot"></div>
+                    <div class="process-timeline-content">
                         <h3 class="text-xl font-semibold text-white">The Logic (The Architect)</h3>
                         <p class="mt-2 text-gray-400">I deconstruct challenges into a clear, logical framework, defining the <strong>what</strong> and <strong>why</strong> before any code is generated.</p>
                     </div>
                 </div>
-                <div class="timeline-item mb-12">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                <div class="process-timeline-item mb-12">
+                    <div class="process-timeline-dot"></div>
+                    <div class="process-timeline-content">
                         <h3 class="text-xl font-semibold text-white">The Prompt (The AI Interface)</h3>
                         <p class="mt-2 text-gray-400">I translate logic into precise instructions for an AI, generating complex VBA scripts to turn strategy into automation.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
+                <div class="process-timeline-item">
+                    <div class="process-timeline-dot"></div>
+                    <div class="process-timeline-content">
                         <h3 class="text-xl font-semibold text-white">The Impact (The Result)</h3>
                         <p class="mt-2 text-gray-400">The result is speed, accuracy, and clarity, reducing report generation from hours to minutes for better decision-making.</p>
                     </div>
@@ -219,7 +160,7 @@
 
         <!-- Projects Section -->
         <section id="projects" class="py-24 reveal">
-            <h2 class="text-3xl font-bold font-heading text-white mb-6">Projects</h2>
+            <h2 class="text-3xl font-bold font-heading text-white mb-6 uppercase">Projects</h2>
             <p class="text-lg text-gray-400 mb-8 max-w-3xl">A selection of projects that demonstrate my ability to translate business needs into efficient, automated solutions.</p>
              <div class="relative">
                 <div class="slider-container -mx-2">
@@ -273,6 +214,32 @@
             </div>
         </section>
 
+        <!-- Key Responsibilities Section -->
+        <section id="responsibilities" class="py-24 reveal">
+            <h2 class="text-3xl font-bold font-heading text-white mb-12 text-center uppercase">Key Responsibilities</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">The Human Logic (My Expertise)</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> MIS & Formulated Reporting</li>
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> Complex Data Compilation & Analysis</li>
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> SLA Management & Backend Operations</li>
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> Advanced Excel (`PIVOT`, `SUMIFS`, etc.)</li>
+                    </ul>
+                </div>
+                <div>
+                   <h3 class="text-xl font-semibold text-white mb-4">The Machine Execution (My Force Multiplier)</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> AI-Powered VBA Scripting</li>
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> Automated Dashboard & Report Creation</li>
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> Automated Logical Workflows</li>
+                        <li class="flex items-start"><span class="text-[var(--accent-red)] mr-3 mt-1">▪</span> Rapid Excel Solution Development</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Contact Section -->
         <section id="contact" class="py-24 reveal">
              <div class="text-center">
@@ -288,273 +255,10 @@
 
     </main>
 
-    <footer class="text-center py-8 text-gray-500 text-sm">
-        <div class="container mx-auto px-6 max-w-lg mb-8">
-            <div class="relative mb-6">
-                <input type="text" placeholder="Search..." class="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500">
-                <svg class="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
-            <div class="flex justify-center items-center space-x-6">
-                 <a href="mailto:your-email@example.com" class="text-gray-400 hover:text-white transition-colors" title="Email">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors" title="LinkedIn">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-                </a>
-                <a href="#" class="inline-block bg-[var(--accent-red)] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[var(--accent-red-dark)] transition-all duration-300 transform hover:scale-105 text-sm">
-                    Download CV
-                </a>
-            </div>
-        </div>
+    <footer class="text-center py-8 text-gray-500 text-sm border-t border-gray-600/50">
         <p>&copy; 2025 Abhijeet Singh | MIS & AI-Driven Operations</p>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Header scroll effect
-            const header = document.getElementById('main-header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-            const hamburger = document.querySelector('.hamburger');
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenuPanel.classList.toggle('translate-x-full');
-                hamburger.classList.toggle('active');
-            });
-            document.querySelectorAll('#mobile-menu-panel a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenuPanel.classList.add('translate-x-full');
-                    hamburger.classList.remove('active');
-                });
-            });
-
-            // Hero typing animation
-            const typingElement = document.getElementById('hero-typing');
-            const words = ["clear, actionable insights.", "efficient automated systems.", "operational excellence."];
-            let wordIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-
-            function type() {
-                const currentWord = words[wordIndex];
-                if (isDeleting) {
-                    typingElement.textContent = currentWord.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    typingElement.textContent = currentWord.substring(0, charIndex + 1);
-                    charIndex++;
-                }
-
-                if (!isDeleting && charIndex === currentWord.length) {
-                    isDeleting = true;
-                    setTimeout(type, 2000);
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length;
-                    setTimeout(type, 500);
-                } else {
-                    setTimeout(type, isDeleting ? 50 : 100);
-                }
-            }
-            type();
-
-            // Scroll reveal animation
-            const revealElements = document.querySelectorAll('.reveal');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-            revealElements.forEach(el => observer.observe(el));
-            
-            // Active nav link on scroll
-            const sections = document.querySelectorAll('main section');
-            const navLinks = document.querySelectorAll('.nav-link-desktop');
-            const scrollObserver = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
-                        });
-                    }
-                });
-            }, { rootMargin: '-30% 0px -70% 0px' });
-            sections.forEach(sec => scrollObserver.observe(sec));
-
-
-            // --- D3 Mind Map ---
-            function drawMindMap() {
-                 const timelineData = {
-                    "name": "My Timeline",
-                    "children": [
-                        { "name": "Experience", "children": [
-                            {"name": "FEB 2024 - Present", "children": [{"name": "NPE Operations @ Bharti Airtel"}]}
-                        ]},
-                        { "name": "Education", "children": [
-                            {"name": "JULY 2024 - Present", "children": [{"name": "MSc Biotechnology (ODL)"}]},
-                            {"name": "2020 - 2023", "children": [{"name": "Biotechnology Hons."}]}
-                        ]}
-                    ]
-                };
-
-                const container = document.getElementById('timeline-map-container');
-                if (!container) return;
-                container.innerHTML = ''; 
-                
-                const width = container.clientWidth;
-                const height = container.clientHeight;
-
-                const svg = d3.select(container).append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .call(d3.zoom().extent([[0, 0], [width, height]]).scaleExtent([0.5, 3]).on("zoom", ({transform}) => g.attr("transform", transform)));
-
-                const g = svg.append("g").attr("transform", `translate(${width / 4}, ${height / 2})`);
-                
-                const treeLayout = d3.tree().nodeSize([100, 220]);
-                const root = d3.hierarchy(timelineData, d => d.children);
-                
-                let i = 0;
-                root.x0 = 0;
-                root.y0 = 0;
-                
-                if(root.children) {
-                    root.children.forEach(collapse);
-                }
-                update(root);
-
-                function collapse(d) {
-                    if (d.children) {
-                        d._children = d.children;
-                        d._children.forEach(collapse);
-                        d.children = null;
-                    }
-                }
-
-                function update(source) {
-                    const duration = 750;
-                    const treeData = treeLayout(root);
-                    const nodes = treeData.descendants();
-                    const links = treeData.descendants().slice(1);
-                    
-                    const node = g.selectAll("g.mind-map-node").data(nodes, d => d.id || (d.id = ++i));
-
-                    const nodeEnter = node.enter().append("g")
-                        .attr("class", "mind-map-node")
-                        .attr("transform", d => `translate(${source.y0},${source.x0})`)
-                        .on("click", (event, d) => {
-                            if (d.children || d._children) { 
-                                toggle(d);
-                                update(d);
-                            }
-                        });
-
-                    nodeEnter.append("rect")
-                        .attr("width", 180).attr("height", 50)
-                        .attr("x", -90).attr("y", -25);
-                    
-                    nodeEnter.append("text")
-                        .attr("dy", ".35em")
-                        .attr("text-anchor", "middle")
-                        .text(d => d.data.name);
-                        
-                    nodeEnter.merge(node).transition().duration(duration)
-                        .attr("transform", d => `translate(${d.y},${d.x})`);
-
-                    node.exit().transition().duration(duration)
-                        .attr("transform", d => `translate(${source.y},${source.x})`).remove();
-
-                    const link = g.selectAll("path.mind-map-link").data(links, d => d.id);
-
-                    link.enter().insert("path", "g")
-                        .attr("class", "mind-map-link")
-                        .attr("d", d => {
-                            const o = {x: source.x0, y: source.y0};
-                            return d3.linkHorizontal()({source: o, target: o});
-                        })
-                        .merge(link).transition().duration(duration)
-                        .attr("d", d => d3.linkHorizontal().x(d => d.y).y(d => d.x)({source: d.parent, target: d}));
-
-                    link.exit().transition().duration(duration)
-                        .attr("d", d => {
-                            const o = {x: source.x, y: source.y};
-                            return d3.linkHorizontal()({source: o, target: o});
-                        }).remove();
-
-                    nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
-                }
-                
-                function toggle(d) {
-                    if (d.children) {
-                        d._children = d.children; d.children = null;
-                    } else {
-                        d.children = d._children; d._children = null;
-                    }
-                }
-            }
-
-            drawMindMap();
-            window.addEventListener('resize', drawMindMap);
-
-            // --- Project Slider ---
-            const track = document.querySelector('.slider-track');
-            if (track) {
-                const slides = Array.from(track.children);
-                const nextButton = document.querySelector('.slider-button.next');
-                const prevButton = document.querySelector('.slider-button.prev');
-                let currentIndex = 0;
-
-                const getSlidesPerView = () => {
-                    if (window.innerWidth >= 1024) return 3;
-                    if (window.innerWidth >= 768) return 2;
-                    return 1;
-                };
-
-                const updateSlider = () => {
-                    const slidesPerView = getSlidesPerView();
-                    const slideWidth = track.clientWidth / slidesPerView;
-                    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-                    prevButton.style.display = currentIndex === 0 ? 'none' : 'flex';
-                    nextButton.style.display = currentIndex >= slides.length - slidesPerView ? 'none' : 'flex';
-                };
-
-                nextButton.addEventListener('click', () => {
-                    const slidesPerView = getSlidesPerView();
-                    if (currentIndex < slides.length - slidesPerView) {
-                        currentIndex++;
-                        updateSlider();
-                    }
-                });
-
-                prevButton.addEventListener('click', () => {
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        updateSlider();
-                    }
-                });
-
-                window.addEventListener('resize', () => {
-                    currentIndex = 0; // Reset on resize
-                    updateSlider();
-                });
-
-                // Initial setup
-                // Use a slight delay to ensure correct width calculation
-                setTimeout(updateSlider, 100);
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
-
