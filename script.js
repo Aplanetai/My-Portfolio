@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function renderTimelineCards() {
+        if (!timelineSliderTrack) return;
         let filteredData = timelineData;
 
         if (currentTimelineFilter !== 'all') {
@@ -134,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
             card.innerHTML = `
                 <div class="p-6 h-full rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] flex flex-col">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center mr-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center mr-4 flex-shrink-0">
                             ${event.type === 'education' ? 
                                 `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-red)]"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>` : 
                                 `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-red)]"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>`
@@ -205,11 +206,17 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             const slidesPerView = getSlidesPerView();
             const slideWidth = getSlideWidth();
+            
+            // Clamp currentIndex
+            const maxIndex = slides.length > 0 ? slides.length - slidesPerView : 0;
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            if (currentIndex < 0) currentIndex = 0;
+
             currentTranslate = currentIndex * slideWidth;
             track.style.transform = `translateX(-${currentTranslate}px)`;
             
             if (prevButton) prevButton.style.display = currentIndex === 0 ? 'none' : 'flex';
-            if (nextButton) nextButton.style.display = currentIndex >= slides.length - slidesPerView ? 'none' : 'flex';
+            if (nextButton) nextButton.style.display = currentIndex >= maxIndex ? 'none' : 'flex';
         };
 
         const nextSlide = () => {
@@ -281,6 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial render and setup for both sliders
     renderTimelineCards();
-    initializeSlider('.slider-container');
+    initializeSlider('#projects-slider-container');
 });
 
